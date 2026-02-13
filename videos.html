@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos - Academia Educativa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #8b5cf6;
+            --primary-blue: #3b82f6;
+            --light-purple: #a78bfa;
+            --dark-purple: #6d28d9;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--light-bg);
+        }
+
+        /* HEADER */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 50px;
+            background: var(--light-bg);
+            border: 2px solid var(--primary-purple);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-purple);
+        }
+
+        /* HERO VIDEO SECTION */
+        .video-hero {
+            margin-top: 90px;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .video-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .video-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* COURSES CONTAINER */
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .course-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid var(--light-bg);
+        }
+
+        .course-icon-small {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .course-section:nth-child(2) .course-icon-small {
+            background: linear-gradient(135deg, #ef4444, #fca5a5);
+        }
+
+        .course-section:nth-child(3) .course-icon-small {
+            background: linear-gradient(135deg, #10b981, #6ee7b7);
+        }
+
+        .course-section:nth-child(4) .course-icon-small {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        .course-info h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-info p {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* VIDEO GRID */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: var(--light-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(139, 92, 246, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-icon {
+            transform: scale(1.1);
+            background: var(--primary-purple);
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .video-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1e293b;
+            padding: 3rem 2rem 2rem;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer ul li a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-purple);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-credits {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-credits p {
+            margin: 0.3rem 0;
+            font-size: 0.85rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .video-hero h1 {
+                font-size: 2rem;
+            }
+
+            .course-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .course-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html">
+                <div class="logo-placeholder">Logo Imagen 1</div>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="videos.html">VIDEOS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="video-hero">
+        <h1>Biblioteca de Videos</h1>
+        <p>Aprende con nuestros videos explicativos de cada curso</p>
+    </section>
+
+    <!-- COURSES CONTAINER -->
+    <div class="courses-container">
+        
+        <!-- CÁLCULO -->
+        <section class="course-section" id="calculo">
+            <div class="course-header">
+                <div class="course-icon-small">📐</div>
+                <div class="course-info">
+                    <h2>Cálculo</h2>
+                    <p>Funciones, límites, derivadas e integrales</p>
+                </div>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Introducción a Límites</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 15:30</span>
+                            <span>👁 1.2K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Derivadas - Regla de la Cadena</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 22:45</span>
+                            <span>👁 2.5K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Integrales Definidas e Indefinidas</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 28:15</span>
+                            <span>👁 3.1K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Aplicaciones de Derivadas</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 18:20</span>
+                            <span>👁 1.8K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Series y Sucesiones</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 25:10</span>
+                            <span>👁 900 vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Teorema Fundamental del Cálculo</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 20:35</span>
+                            <span>👁 1.5K vistas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CIRCUITOS ELÉCTRICOS -->
+        <section class="course-section" id="circuitos">
+            <div class="course-header">
+                <div class="course-icon-small">⚡</div>
+                <div class="course-info">
+                    <h2>Circuitos Eléctricos</h2>
+                    <p>Análisis de circuitos, ley de Ohm, teoremas fundamentales</p>
+                </div>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ley de Ohm Explicada</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 12:40</span>
+                            <span>👁 2.8K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Circuitos en Serie y Paralelo</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 24:15</span>
+                            <span>👁 3.2K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Análisis de Mallas</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 30:20</span>
+                            <span>👁 1.9K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Análisis de Nodos</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 28:45</span>
+                            <span>👁 2.1K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Teorema de Thévenin</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 22:30</span>
+                            <span>👁 1.6K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Teorema de Norton</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 19:55</span>
+                            <span>👁 1.3K vistas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ÁLGEBRA -->
+        <section class="course-section" id="algebra">
+            <div class="course-header">
+                <div class="course-icon-small">🔢</div>
+                <div class="course-info">
+                    <h2>Álgebra</h2>
+                    <p>Todos los temas de álgebra que quieras estudiar</p>
+                </div>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Factorización Básica</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 16:20</span>
+                            <span>👁 4.2K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ecuaciones Lineales</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 14:50</span>
+                            <span>👁 3.8K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Sistemas de Ecuaciones</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 26:35</span>
+                            <span>👁 2.7K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Matrices y Determinantes</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 32:10</span>
+                            <span>👁 2.2K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Polinomios</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 21:45</span>
+                            <span>👁 3.5K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Funciones Cuadráticas</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 23:20</span>
+                            <span>👁 3.1K vistas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FÍSICA -->
+        <section class="course-section" id="fisica">
+            <div class="course-header">
+                <div class="course-icon-small">🔬</div>
+                <div class="course-info">
+                    <h2>Física</h2>
+                    <p>Mecánica, cinemática, dinámica, energía y más</p>
+                </div>
+            </div>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Vectores en Física</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 18:30</span>
+                            <span>👁 3.4K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Movimiento Rectilíneo Uniforme</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 20:15</span>
+                            <span>👁 4.1K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Leyes de Newton</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 27:40</span>
+                            <span>👁 5.2K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Trabajo y Energía</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 24:25</span>
+                            <span>👁 3.9K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Movimiento Circular</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 22:50</span>
+                            <span>👁 2.8K vistas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="play-icon">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ondas y Oscilaciones</h3>
+                        <div class="video-meta">
+                            <span class="video-duration">⏱ 29:15</span>
+                            <span>👁 2.3K vistas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <div style="width: 150px; height: 50px; background: rgba(255,255,255,0.1); border: 2px solid white; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.8rem; margin-bottom: 1rem;">Logo Imagen 1</div>
+                    <div class="social-links">
+                        <a href="https://youtube.com" class="social-icon" target="_blank" title="Youtube">▶</a>
+                        <a href="https://instagram.com" class="social-icon" target="_blank" title="Instagram">📷</a>
+                        <a href="https://facebook.com" class="social-icon" target="_blank" title="Facebook">f</a>
+                        <a href="https://twitter.com" class="social-icon" target="_blank" title="Twitter">🐦</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Cursos</h4>
+                    <ul>
+                        <li><a href="#calculo">Cálculo</a></li>
+                        <li><a href="#circuitos">Circuitos Eléctricos</a></li>
+                        <li><a href="#algebra">Álgebra</a></li>
+                        <li><a href="#fisica">Física</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2024 Academia Educativa</p>
+                <div class="footer-credits">
+                    <p><strong>Créditos:</strong></p>
+                    <p>José Enrique Silupuvo Valverde</p>
+                    <p>Nox</p>
+                    <p>"Para no perder la racha Lissy"</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
